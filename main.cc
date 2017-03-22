@@ -11,15 +11,17 @@
 //
 
 #include "sysincludes.h" 
-#include "namespaces.h"
-#include "constants.h"
+//#include "namespaces.h"
+//#include "constants.h"
 
-#include "structs.h"
-#include "prototypes.h" 
+//#include "structs.h"
+//#include "prototypes.h" 
 
 // Be sure to invlude these item from globals.h in a global scope so they
 // can then be initialized.
 //
+
+/*
 int nParticles;
 int lattice_min;
 int lattice_max;
@@ -34,10 +36,14 @@ BoostRandomContext boostRandom;
 
 long iter, step;
 bool firstStep;
+*/
+
+void init();
+
 int windowsize;
 
 int main(int argc, char** argv) {
-
+/*
     double referenceEnergy;
     double testEnergy;
 
@@ -90,22 +96,21 @@ int main(int argc, char** argv) {
 
     // Now that all of the global variables have been initialized, we can initialize
     // the graphics.
-
+*/
     windowsize=800;    
     glutInit(&argc, argv);
-    start_time = glutGet(GLUT_ELAPSED_TIME);    
     glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB  );
     glutInitWindowSize (windowsize, windowsize); 
-    glutCreateWindow("Colloidal Dyamics");
+    glutCreateWindow("Texture Example");
     init();
 /*
     glClearColor(0.0,0.0,0.0,0.0);
     glLoadIdentity();
     glClear (GL_COLOR_BUFFER_BIT);
-*/
     glutDisplayFunc(countClusters);
     glutReshapeFunc(reshape);
     glutIdleFunc(propagate);
+*/
     glutMainLoop();
     
 } 

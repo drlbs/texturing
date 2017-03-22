@@ -5,7 +5,7 @@
 
 GLuint metalTexture;
 
-void init(void) 
+void init() 
 {
 
    /* Now load the texture */ 

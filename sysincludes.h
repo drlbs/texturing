@@ -12,8 +12,6 @@
 #include <stdio.h>
 #include <limits>                     // Used to define random generator range 
 #include <ctime>                      // Used to set random generator seed
-#include <boost/lexical_cast.hpp>
-#include <boost/random.hpp>
 
 #include <GL/glut.h>
 #include <GL/gl.h>
