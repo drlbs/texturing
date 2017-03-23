@@ -11,106 +11,62 @@
 //
 
 #include "sysincludes.h" 
-//#include "namespaces.h"
-//#include "constants.h"
+extern GLuint metalTexture;
 
-//#include "structs.h"
-//#include "prototypes.h" 
-
-// Be sure to invlude these item from globals.h in a global scope so they
-// can then be initialized.
-//
-
-/*
-int nParticles;
-int lattice_min;
-int lattice_max;
-string fileheader, filename, command, prefix;
-
-int start_time, elapsed_time;
-
-vector<Particle> colloids;
-Particle colloid;
-
-BoostRandomContext boostRandom;
-
-long iter, step;
-bool firstStep;
-*/
-
-void init();
+void loadTexture();
 
 int windowsize;
 
-int main(int argc, char** argv) {
-/*
-    double referenceEnergy;
-    double testEnergy;
+void reshape (int w, int h)
+{
+   glViewport (0, 0, (GLsizei) w, (GLsizei) h);
+   glMatrixMode (GL_PROJECTION);
+   glLoadIdentity();
+   gluPerspective(40.0, (GLfloat) w/(GLfloat) h, 1.0, 40.0);
+   glMatrixMode(GL_MODELVIEW);
+}
 
-    
-    nParticles = MAX_PARTICLES;
-    lattice_min = LATTICE_MIN;
-    lattice_max = LATTICE_MAX;
+
+void display(){
 
 
-    fstream myfile;
-    fileheader = "data-";
-
-#ifdef GENERATE_RANDOM_SEED
-    boostRandom.setSeed(std::time(0));
-#endif
-
-    // Fill vector array //
-    
-    for (int i=0;i<nParticles;i++) 
-       colloids.push_back(colloid);
-
-    // Now place particles at random positions in lattice //
-    
-//    setInitialPositions( colloids, boostRandom, lattice_min, lattice_max );
-    setInitialPositions( colloids, lattice_min, lattice_max );
- 
-
-    // Calculate reference potentials for everyone
-
-    calculateAllReferencePotentials( colloids ); 
-    
-#ifdef DEBUG
-    // print out prior to starting monte carlo run //
-    //
-    for (int i=0; i<colloids.size(); i++){
-        cout << colloids.at(i).get_x() << " " <<
-                colloids.at(i).get_y() << " " <<
-                colloids.at(i).get_ref_potential() << endl;
-        } 
-#endif
-
-     // Now start Monte-Carlo Simulation
-     //
-
-    // Set initial value of loop counters here; they will be updated in idleFunction
-
-    step = 0; // Outer loop counter
-    iter = 0; // Inner loop counter
-    firstStep = true;
-
-    // Now that all of the global variables have been initialized, we can initialize
-    // the graphics.
-*/
-    windowsize=800;    
-    glutInit(&argc, argv);
-    glutInitDisplayMode (GLUT_DOUBLE | GLUT_RGB  );
-    glutInitWindowSize (windowsize, windowsize); 
-    glutCreateWindow("Texture Example");
-    init();
-/*
     glClearColor(0.0,0.0,0.0,0.0);
     glLoadIdentity();
     glClear (GL_COLOR_BUFFER_BIT);
-    glutDisplayFunc(countClusters);
+
+    glColor3f(1.0, 1.0, 1.0);
+    gluLookAt(  20.0,   20.0, -20.0,  // Eye
+                0.0,   0.0, 0.0,  // Center
+                0.0,   0.0, 1.0); // Up
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_DEPTH_TEST);
+
+    loadTexture();
+    glBegin(GL_LINES);
+
+    glTexCoord2d( 0.0, 0.0);   glVertex2d( 0.0, 0.0 );
+    glTexCoord2d( 0.0, 1.0);   glVertex2d( 0.0, 10.0 );
+    glTexCoord2d( 1.0, 1.0);   glVertex2d( 10.0, 10.0 );
+    glTexCoord2d( 1.0, 0.0);   glVertex2d( 10.0, 0.0 );
+
+    glEnd();
+    glFlush();
+    glDisable(GL_TEXTURE_2D);
+
+}
+
+
+int main(int argc, char** argv) {
+    windowsize=800;    
+    glutInit(&argc, argv);
+    glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH  );
+    glutInitWindowSize (windowsize, windowsize); 
+    glutCreateWindow("Texture Example");
+    glClearColor(0.0,0.0,0.0,0.0);
+    glLoadIdentity();
+    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+    glutDisplayFunc(display);
     glutReshapeFunc(reshape);
-    glutIdleFunc(propagate);
-*/
     glutMainLoop();
     
 } 
