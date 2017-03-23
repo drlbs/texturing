@@ -29,20 +29,36 @@ void reshape (int w, int h)
 
 void display(){
 
+    GLuint metalTexture;
+    unsigned char* image;
+    int width, height;
 
     glClearColor(0.0,0.0,0.0,0.0);
     glLoadIdentity();
     glClear (GL_COLOR_BUFFER_BIT);
 
     glColor3f(1.0, 1.0, 1.0);
-    gluLookAt(  20.0,   20.0, -20.0,  // Eye
+    gluLookAt(  20.0,   20.0,  20.0,  // Eye
                 0.0,   0.0, 0.0,  // Center
                 0.0,   0.0, 1.0); // Up
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
 
-    loadTexture();
-    glBegin(GL_LINES);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
+
+   image = SOIL_load_image("./textures/smiley_1024_1024.jpg", &width, &height, 0, SOIL_LOAD_RGB); 
+   glGenTextures(1, &metalTexture);  
+   glBindTexture(GL_TEXTURE_2D, metalTexture); 
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+   //glGenerateMipmap(GL_TEXTURE_2D); 
+
+    glBegin(GL_POLYGON);
 
     glTexCoord2d( 0.0, 0.0);   glVertex2d( 0.0, 0.0 );
     glTexCoord2d( 0.0, 1.0);   glVertex2d( 0.0, 10.0 );
