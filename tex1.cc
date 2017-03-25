@@ -117,6 +117,8 @@ int main(int argc, char** argv) {
     glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH  );
     glutInitWindowSize (windowsize, windowsize); 
     glutCreateWindow("Texture Example");
+// After creating the window call glewInit so context will be initialized. Otherwise
+// you will probabaly see segfaults.
     glewInit();
     glClearColor(0.0,0.0,0.0,0.0);
     glLoadIdentity();
