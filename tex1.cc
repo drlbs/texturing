@@ -9,7 +9,7 @@
 //
 //  compile with:
 //
-//  g++  main.cc -lGL -lGLU -lGLEW -lglut libSOIL.a
+//  g++  tex1.cc -lGL -lGLU -lGLEW -lglut libSOIL.a
 //
 
 #include <cmath>
