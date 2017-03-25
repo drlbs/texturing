@@ -1,13 +1,12 @@
 //
 //
-//  Colloidal Dynamics Monte Carlo Stepper
+//  Texturing Example Using SOIL 
 //
 //  Andrew J. Pounds, Ph.D.
-//  Department of Chemistry 
+//  Department of Computer Science 
 //  Mercer University
-//  Spring 2013
+//  Spring 2017
 //
-//  Based on Meyer, et. al.  J. Phys. Chem B 110 (2006) 6040.
 //
 
 #include "sysincludes.h" 
@@ -30,19 +29,29 @@ void reshape (int w, int h)
 void display(){
 
     GLuint metalTexture;
+   unsigned char memstore[1024*1024*3];
     unsigned char* image;
     int width, height;
+   image = &memstore[0];
 
     glClearColor(0.0,0.0,0.0,0.0);
     glLoadIdentity();
     glClear (GL_COLOR_BUFFER_BIT);
 
     glColor3f(1.0, 1.0, 1.0);
-    gluLookAt(  20.0,   20.0,  20.0,  // Eye
+    gluLookAt(  20.0,   20.0,   20.0,  // Eye
                 0.0,   0.0, 0.0,  // Center
                 0.0,   0.0, 1.0); // Up
-    glEnable(GL_TEXTURE_2D);
+    //glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
+
+    printf( "OpenGL Version: %s\n", glGetString(GL_VERSION)); 
+
+    puts("Before glGenTextures");
+   glGenTextures(1, &metalTexture);  
+   
+    puts("Before glBindTextures");
+   glBindTexture(GL_TEXTURE_2D, metalTexture); 
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
@@ -50,13 +59,24 @@ void display(){
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-    glTexParameteri(GL_TEXTURE_2D, GL_GENERATE_MIPMAP, GL_TRUE);
 
-   image = SOIL_load_image("./textures/smiley_1024_1024.jpg", &width, &height, 0, SOIL_LOAD_RGB); 
-   glGenTextures(1, &metalTexture);  
-   glBindTexture(GL_TEXTURE_2D, metalTexture); 
+
+    puts("Before load_image");
+    image = SOIL_load_image("./textures/smiley_1024_1024.jpg", &width, &height, 0, SOIL_LOAD_RGB); 
+
+    puts("Before glTexImage2D");
+    printf("%d %d\n", width, height);
+
    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-   //glGenerateMipmap(GL_TEXTURE_2D); 
+    puts("Before glGenerateMipmap");
+    glGenerateMipmap(GL_TEXTURE_2D); 
+
+    puts("Before SOIL_free");
+     
+   SOIL_free_image_data(image);
+   glBindTexture(GL_TEXTURE_2D, 0);
+
+    puts("Before glBegin");
 
     glBegin(GL_POLYGON);
 
@@ -78,6 +98,7 @@ int main(int argc, char** argv) {
     glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH  );
     glutInitWindowSize (windowsize, windowsize); 
     glutCreateWindow("Texture Example");
+    glewInit();
     glClearColor(0.0,0.0,0.0,0.0);
     glLoadIdentity();
     glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
