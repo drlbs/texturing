@@ -29,10 +29,8 @@ void reshape (int w, int h)
 void display(){
 
     GLuint metalTexture;
-   unsigned char memstore[1024*1024*3];
     unsigned char* image;
     int width, height;
-   image = &memstore[0];
 
     glClearColor(0.0,0.0,0.0,0.0);
     glLoadIdentity();
@@ -42,7 +40,7 @@ void display(){
     gluLookAt(  20.0,   20.0,   20.0,  // Eye
                 0.0,   0.0, 0.0,  // Center
                 0.0,   0.0, 1.0); // Up
-    //glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_2D);
     glEnable(GL_DEPTH_TEST);
 
     printf( "OpenGL Version: %s\n", glGetString(GL_VERSION)); 
@@ -74,7 +72,7 @@ void display(){
     puts("Before SOIL_free");
      
    SOIL_free_image_data(image);
-   glBindTexture(GL_TEXTURE_2D, 0);
+   //glBindTexture(GL_TEXTURE_2D, 0);
 
     puts("Before glBegin");
 
