@@ -28,14 +28,15 @@ void reshape (int w, int h)
    glViewport (0, 0, (GLsizei) w, (GLsizei) h);
    glMatrixMode (GL_PROJECTION);
    glLoadIdentity();
-   gluPerspective(40.0, (GLfloat) w/(GLfloat) h, 1.0, 40.0);
+   gluPerspective(40.0, (GLfloat) w/(GLfloat) h, 1.0, 100.0);
    glMatrixMode(GL_MODELVIEW);
 }
 
 
 void display(){
 
-    GLuint myTexture;     // <-- Stores the ID of the texture 
+    GLuint myFirstTexture;     // <-- Stores the ID of the texture 
+    GLuint mySecondTexture;    // <-- Stores the ID of the texture 
     unsigned char* image; // <-- Stores image information
     int width, height;    // <-- Used by SOIL
 
@@ -47,9 +48,9 @@ void display(){
     glLoadIdentity();
     glClear (GL_COLOR_BUFFER_BIT);
 
-    gluLookAt(  5.0,   5.0,   20.0,  // Eye
-                5.0,   5.0, 0.0,  // Center
-                0.0,   -1.0, 0.0); // Up
+    gluLookAt(  20.0,   20.0,   20.0,  // Eye
+                0.0,   0.0, 0.0,  // Center
+                0.0,   0.0, 1.0); // Up
 
 // Enable Texturing and the Depth Buffer
     glEnable(GL_TEXTURE_2D);
@@ -62,8 +63,8 @@ void display(){
 // Here we will generate a texture ID, give it a name then we bind it to
 // a structure type.  Once I bind a texture all subsequent operations
 // pertain to that texture until I either unbind it or bind another texture. 
-    glGenTextures(1, &myTexture);  
-    glBindTexture(GL_TEXTURE_2D, myTexture); 
+    glGenTextures(1, &myFirstTexture);  
+    glBindTexture(GL_TEXTURE_2D, myFirstTexture); 
 
 // Here I am setting up filters and functions to be used for the MIPMAPS.  Rather than
 // go into the details of MIPMAPS here, take a look at your text of just read
@@ -88,11 +89,38 @@ void display(){
 // Be nice and clean up after yourself.
     SOIL_free_image_data(image);
 
+// Now Repeat the Process for the Second Texture
+
+    glGenTextures(1, &mySecondTexture);  
+    glBindTexture(GL_TEXTURE_2D, mySecondTexture); 
+
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
+    image = SOIL_load_image("./textures/up_256_256.png", &width, &height, 0, SOIL_LOAD_RGB); 
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
+
+    glGenerateMipmap(GL_TEXTURE_2D); 
+
+    SOIL_free_image_data(image);
+
+
 // Since we have been working with direct rendering, I wanted to give you an example that used 
 // some modern aspects of texturing but still used direct rendering.  In the following example 
 // I create my Texture Coordinates on the left (they vary between 0 and 1) and the vertices for
 // my polygon on the right.  
 
+
+    // Bind the texture you want to use and draw the first polygon
+
+    glBindTexture(GL_TEXTURE_2D, myFirstTexture);
+    glPushMatrix();
+    glRotatef(90.0,0.0,1.0,0.0);
+    glTranslatef(0.0,-10.0,0.0);
     glBegin(GL_POLYGON);
 
       glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
@@ -101,6 +129,24 @@ void display(){
       glTexCoord2d( 1.0, 0.0);   glVertex2d( 10.0,  0.0 );
 
     glEnd();
+
+    // Bind the second you want to use and draw the first polygon
+
+    glBindTexture(GL_TEXTURE_2D, mySecondTexture);
+    glPushMatrix();
+    glRotatef(90.0,1.0,0.0,0.0);
+    glTranslatef(0.0,-10.0,-10.0);
+    glBegin(GL_POLYGON);
+
+      glTexCoord2d( 0.0, 0.0);   glVertex2d(  0.0,  0.0 );
+      glTexCoord2d( 0.0, 1.0);   glVertex2d(  0.0, 10.0 );
+      glTexCoord2d( 1.0, 1.0);   glVertex2d( 10.0, 10.0 );
+      glTexCoord2d( 1.0, 0.0);   glVertex2d( 10.0,  0.0 );
+
+    glEnd();
+
+
+    glPopMatrix();
 
 // Flush the buffer
     glFlush();
