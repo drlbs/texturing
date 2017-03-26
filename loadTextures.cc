@@ -16,7 +16,7 @@ void loadTextures(){
 // global space, so create an array of pointers for this.  For simplicity we
 // will statically assign its size based on the number of textures we are using
 
-   GLuint *textures[2];
+    GLuint *textures[2];
 
 // Here we will generate a texture ID, give it a name then we bind it to
 // a structure type.  Once I bind a texture all subsequent operations
@@ -70,8 +70,8 @@ void loadTextures(){
 
     // And now save those texture locations
 
-    textures[0] = &myFirstTexture;
-    textures[1] = &mySecondTexture;
+    *(textures+0)   = &myFirstTexture;
+    *(textures+1) = &mySecondTexture;
 
 }
 
