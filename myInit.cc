@@ -3,7 +3,10 @@
 
 #include "sysincludes.h"        
 
+void loadTextures();
+
 #include "globals.h"
+
 
 void myInit(){
 

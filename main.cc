@@ -3,6 +3,9 @@
 
 #include "sysincludes.h"        
 
+void myInit();
+void display();
+void reshape(int,int);
 
 int main(int argc, char** argv) {
     int windowsize;
