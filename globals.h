@@ -1,7 +1,4 @@
 
-#ifndef GLOBALS
-#define GLOBALS
 
-extern GLuint *textures;
+extern GLuint textures[2];
 
-#endif
