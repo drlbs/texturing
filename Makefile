@@ -1,6 +1,6 @@
 
-CC = gcc
-OPT = -ggdb
+CC = g++
+OPT = -O2
 OBJS = myInit.o loadTextures.o reshape.o display.o 
 HEADERS = SOIL.h sysincludes.h globals.h 
 LDLIBS = -lGL -lGLU -lGLEW -lglut libSOIL.a
