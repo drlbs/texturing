@@ -7,6 +7,12 @@
 
 void display(){
 
+    // Enable Texturing and the Depth Buffer
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_DEPTH_TEST);
+    glClear (GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
+
+
     // Bind the texture you want to use and draw the first polygon
 
     glBindTexture(GL_TEXTURE_2D, textureID[0]);
@@ -37,11 +43,13 @@ void display(){
 
     glEnd();
 
-
     glPopMatrix();
 
-// Flush the buffer
+    // Flush the buffer
     glFlush();
+
+    glDisable(GL_DEPTH_TEST);
+    glDisable(GL_TEXTURE_2D);
 
 }
 

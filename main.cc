@@ -17,8 +17,8 @@ int main(int argc, char** argv) {
     glutCreateWindow("Texture Example");
     glewInit();
     myInit();
-    glutDisplayFunc(display);
     glutReshapeFunc(reshape);
+    glutDisplayFunc(display);
     glutMainLoop();
     
 }
