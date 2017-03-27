@@ -2,8 +2,7 @@
 #ifndef SYSINCLUDES 
 #define SYSINCLUDES
 
-#include <cstdlib>
-#include <cmath>
+#include <math.h>
 #include <stdio.h>
 
 #include <GL/glew.h>

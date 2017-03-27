@@ -1,5 +1,5 @@
 
-CC = g++
+CC = gcc
 OPT = -ggdb
 OBJS = myInit.o loadTextures.o reshape.o display.o 
 HEADERS = SOIL.h sysincludes.h globals.h 

@@ -2,8 +2,7 @@
 #define LOAD_TEXTURES
 
 #include "sysincludes.h"    
-
-#include "globals.h"
+#include "globals.h"    
 
 void loadTextures(){
 
@@ -14,13 +13,13 @@ void loadTextures(){
 // global space, so create an array of pointers for this.  For simplicity we
 // will statically assign its size based on the number of textures we are using
 
-    GLuint textures[2];
+    GLuint textureID[2];
 
 // Here we will generate a texture ID, give it a name then we bind it to
 // a structure type.  Once I bind a texture all subsequent operations
 // pertain to that texture until I either unbind it or bind another texture. 
-    glGenTextures(1, &textures[0]);  
-    glBindTexture(GL_TEXTURE_2D, textures[0]); 
+    glGenTextures(1, &textureID[0]);  
+    glBindTexture(GL_TEXTURE_2D, textureID[0]); 
 
 // Here I am setting up filters and functions to be used for the MIPMAPS.  Rather than
 // go into the details of MIPMAPS here, take a look at your text of just read
@@ -47,8 +46,8 @@ void loadTextures(){
 
 // Now Repeat the Process for the Second Texture
 
-    glGenTextures(1, &textures[1]);  
-    glBindTexture(GL_TEXTURE_2D, textures[1]); 
+    glGenTextures(1, &textureID[1]);  
+    glBindTexture(GL_TEXTURE_2D, textureID[1]); 
 
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_MIRRORED_REPEAT);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_MIRRORED_REPEAT);

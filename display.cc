@@ -9,7 +9,7 @@ void display(){
 
     // Bind the texture you want to use and draw the first polygon
 
-    glBindTexture(GL_TEXTURE_2D, textures[0]);
+    glBindTexture(GL_TEXTURE_2D, textureID[0]);
     glPushMatrix();
     glRotatef(90.0,0.0,1.0,0.0);
     glTranslatef(0.0,-10.0,0.0);
@@ -24,7 +24,7 @@ void display(){
 
     // Bind the second you want to use and draw the first polygon
 
-    glBindTexture(GL_TEXTURE_2D, textures[1]);
+    glBindTexture(GL_TEXTURE_2D, textureID[1]);
     glPushMatrix();
     glRotatef(90.0,1.0,0.0,0.0);
     glTranslatef(0.0,-10.0,-10.0);

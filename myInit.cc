@@ -2,10 +2,10 @@
 #define MYINIT
 
 #include "sysincludes.h"        
+#include "globals.h"
 
 void loadTextures();
 
-#include "globals.h"
 
 
 void myInit(){

@@ -2,6 +2,7 @@
 #define MAIN 
 
 #include "sysincludes.h"        
+#include "globals.h"
 
 void myInit();
 void display();

@@ -1,4 +1,4 @@
 
 
-extern GLuint textures[2];
+extern GLuint textureID[2];
 
