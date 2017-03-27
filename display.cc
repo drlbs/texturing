@@ -1,5 +1,5 @@
-#ifndef DISPLAY
-#define DISPLAY
+#ifndef DISPLAY_FUNC
+#define DISPLAY_FUNC
 
 #include "sysincludes.h"       
 

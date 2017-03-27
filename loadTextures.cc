@@ -4,16 +4,17 @@
 #include "sysincludes.h"    
 #include "globals.h"    
 
-void loadTextures(){
-
-    unsigned char* image; // <-- Stores image information
-    int width, height;    // <-- Used by SOIL
-
 // We are going to need to save the memory location of the texture objects in a
 // global space, so create an array of pointers for this.  For simplicity we
 // will statically assign its size based on the number of textures we are using
 
     GLuint textureID[2];
+
+void loadTextures(){
+
+    unsigned char* image; // <-- Stores image information
+    int width, height;    // <-- Used by SOIL
+
 
 // Here we will generate a texture ID, give it a name then we bind it to
 // a structure type.  Once I bind a texture all subsequent operations

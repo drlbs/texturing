@@ -13,10 +13,10 @@ tex1 : main.o $(OBJS) $(HEADERS)
 main.o : main.cc globals.h
 	$(CC) $(OPT) main.cc -c
 
-myInit.o : myInit.cc loadTextures.o globals.h
+myInit.o : myInit.cc globals.h
 	$(CC) $(OPT) myInit.cc -c 
 
-loadTextures.o : loadTextures.cc 
+loadTextures.o : loadTextures.cc globals.h 
 	$(CC) $(OPT) loadTextures.cc -c
 
 reshape.o : reshape.cc 
