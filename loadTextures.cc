@@ -8,7 +8,7 @@
 // global space, so create an array of pointers for this.  For simplicity we
 // will statically assign its size based on the number of textures we are using
 
-    GLuint textureID[2];
+    GLuint textureID[3];
 
 void loadTextures(){
 

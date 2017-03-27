@@ -1,4 +1,5 @@
 
 
-extern GLuint textureID[2];
-
+extern GLuint textureID[3];
+extern GLUquadric *earth;
+ 

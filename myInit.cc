@@ -4,6 +4,8 @@
 #include "sysincludes.h"        
 #include "globals.h"
 
+GLUquadric *earth;
+
 void loadTextures();
 
 
@@ -31,6 +33,8 @@ void myInit(){
 
     loadTextures();
 
+    earth = gluNewQuadric();
+    gluQuadricTexture( earth, GL_TRUE);
 }
 
 

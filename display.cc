@@ -45,9 +45,21 @@ void display(){
 
     glPopMatrix();
 
+    // Bind the texture and draw the sphere
+
+    glBindTexture ( GL_TEXTURE_2D, textureID[2]);
+    glTranslatef(-5.0,5.0,-5.0);
+    glScalef(5.0,5.0,5.0);
+    glPushMatrix();
+    glRotatef(90.0,0.0,1.0,0.0);
+    glRotatef(-45.0,0.0,0.0,1.0);
+    gluSphere( earth, 0.9, 36, 72);
+    glPopMatrix();
+ 
     // Flush the buffer
     glFlush();
 
+    // For completeness turn off these options
     glDisable(GL_DEPTH_TEST);
     glDisable(GL_TEXTURE_2D);
 
