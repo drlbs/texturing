@@ -54,7 +54,7 @@ void display(){
     glRotatef(90.0,0.0,1.0,0.0);
     glRotatef(-45.0,0.0,0.0,1.0);
 // The next line fixes the mirrored texture map
-    glScalef(1.0,-1.0,1.0);
+//    glScalef(1.0,-1.0,1.0);
     gluSphere( earth, 0.9, 36, 72);
     glPopMatrix();
  
