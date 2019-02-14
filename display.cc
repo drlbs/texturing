@@ -28,7 +28,7 @@ void display(){
 
     glEnd();
 
-    // Bind the second you want to use and draw the first polygon
+    // Bind the second you want to use and draw the second polygon
 
     glBindTexture(GL_TEXTURE_2D, textureID[1]);
     glPushMatrix();
