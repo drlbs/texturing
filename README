@@ -1,5 +1,13 @@
 This is a very simple example of how to do texturing with OpenGL 4.5 while still
-using glBegin...glEnd and skipping the whole shader language.   This first
-example relies on SOIL for loading images but is very inefficient because everything
-is included in the display function.
+using glBegin...glEnd and skipping the whole shader language.   This second 
+example shows how to load and use multiple textures but is still inefficient 
+because all of the work is done in the display function.
 
+On the soilsrc branch I have also built a method for building things in separate
+directories and utilizing files from separate directories.  Based on the OReilly
+reference 
+
+https://www.oreilly.com/library/view/managing-projects-with/0596006101/ch06.html
+
+(and personal experience) the make facility works optimally well when 
+operating on targets within a single directory.
